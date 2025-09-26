@@ -1,37 +1,151 @@
 # voxelmap
 
-[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/andrewrgarcia/voxelmap/main/LICENSE)
+[![License](http://img.shields.io/\:license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/andrewrgarcia/voxelmap/main/LICENSE)
 [![Documentation Status](https://readthedocs.org/projects/voxelmap/badge/?version=latest)](https://voxelmap.readthedocs.io/en/latest/?badge=latest)
 
-A Python library for making voxel and three-dimensional models from NumPy arrays. 
+A lightweight Python library for building **voxel models** from NumPy arrays.
+Simple to start, modular when you need more.
 
 <a href="https://voxelmap.vercel.app">
 <img src="https://github.com/andrewrgarcia/voxelmap/blob/main/voxelmap.svg?raw=true" width="250"></a>
 
-## Installation and Local Usage 
+---
 
-```ruby
+## 🚀 Installation
+
+Minimal core (NumPy + Matplotlib only):
+
+```bash
 pip install voxelmap
 ```
 
-It is recommended you run voxelmap using a `virtualenv` virtual environment. To do so, follow the below simple protocol to create the virtual environment, run it, and install the package there:
+Optional extras:
 
-```ruby 
-virtualenv venv
+```bash
+pip install voxelmap[io]     # for I/O helpers (pandas, txt/obj conversions)
+pip install voxelmap[mesh]   # for meshing (scipy, scikit-image, pyvista)
+pip install voxelmap[all]    # everything
+```
+
+We recommend using a virtual environment:
+
+```bash
+python -m venv venv
 source venv/bin/activate
 pip install voxelmap
-python [your-voxelmap-script.py]
 ```
-To exit the virtual environment, simply type `deactivate`. To access it at any other time again, enter with the above `source venv...` command. 
 
-## Just starting? Check out our documentation for installation and usage examples
+Deactivate with:
 
-<a href="https://voxelmap.readthedocs.io/en/latest">
-<img src="https://raw.githubusercontent.com/andrewrgarcia/voxelmap/main/docs/img/readthedocs.png?raw=true" width="300" ></a>
+```bash
+deactivate
+```
 
+---
 
-## Disclaimer: Use At Your Own Risk
+## 🧩 Quickstart
 
-This program is free software. It comes without any warranty, to the extent permitted by applicable law. You can redistribute it and/or modify it under the terms of the MIT LICENSE, as published by Andrew Garcia. See LICENSE below for more details.
+### 1. Hello World (Matplotlib, core only)
 
-**[MIT license](./LICENSE)** Copyright 2022 © <a href="https://github.com/andrewrgarcia" target="_blank">Andrew Garcia</a>.
+```python
+import numpy as np
+from voxelmap import Model
+
+# Simple 3×3×3 cube
+array = np.ones((3, 3, 3))
+
+model = Model(array)
+model.set_color(1, "red")         # assign color
+model.draw_mpl(coloring="custom") # static Matplotlib 3D plot
+```
+
+➡️ Produces a **solid red cube** in a Matplotlib 3D plot.
+
+* Rotate = left mouse drag
+* Pan = right mouse drag
+* Zoom = scroll wheel
+
+*(Works with the minimal install, no extras required.)*
+
+---
+
+### 2. Interactive 3D (PyVista, mesh extra)
+
+For full **trackball-style zoom, pan, and rotate**, install with:
+
+```bash
+pip install voxelmap[mesh]
+```
+
+Then:
+
+```python
+import numpy as np
+from voxelmap import Model
+
+array = np.ones((3, 3, 3))  # same cube
+model = Model(array)
+model.set_color(1, "red")
+
+# Interactive PyVista window
+model.draw(coloring="custom")
+```
+
+➡️ Opens an interactive window:
+
+* Rotate freely (trackball)
+* Smooth zoom with scroll/drag
+* Pan and adjust camera in real time
+
+---
+
+### 3. Custom Palette (checkerboard)
+
+```python
+import numpy as np
+from voxelmap import Model
+
+array = np.indices((3, 3, 3)).sum(axis=0) % 2 + 1
+
+model = Model(array)
+model.palette = {1: "black", 2: "white"}
+model.draw_mpl(coloring="custom")
+```
+
+➡️ Produces a **black/white checkerboard cube**.
+
+---
+
+### 4. Gradient Coloring
+
+```python
+import numpy as np
+from voxelmap import Model
+from matplotlib import cm
+
+array = np.ones((10, 3, 3))  # tall column
+model = Model(array)
+
+model.colormap = cm.viridis
+model.alphacm = 0.9
+model.draw_mpl(coloring="linear")
+```
+
+➡️ Produces a **column shaded with a viridis vertical gradient**.
+
+---
+
+## 📚 Documentation
+
+Full usage and advanced examples can be found here:
+👉 [VoxelMap Documentation](https://voxelmap.readthedocs.io/en/latest)
+
+---
+
+## ⚖️ License
+
+This program is free software. It comes without any warranty, to the extent permitted by applicable law.
+You can redistribute it and/or modify it under the terms of the **MIT LICENSE**.
+
+**[MIT license](./LICENSE)** © 2022–present [Andrew Garcia](https://github.com/andrewrgarcia)
+

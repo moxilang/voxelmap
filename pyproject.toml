@@ -1,23 +1,45 @@
-[tool.poetry]
-name = "voxelmap"
-version = "4.4.0"
-description = "A Python library for making voxel and 3D models from NumPy arrays."
-authors = ["andrewrgarcia <garcia.gtr@gmail.com>"]
-license = "MIT"
-readme = "README.md"
-
-[tool.poetry.dependencies]
-python = ">=3.8,<3.12"
-numpy = "^1.24.1"
-matplotlib = "^3.6.2"
-pandas = "^1.5.2"
-opencv-python = "^4.7.0.68"
-scipy = "^1.10.0"
-scikit-image = "^0.19.3"
-pyvista = "^0.44.2"
-colorcet = "^3.0.1"
-addict = "^2.4.0"
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voxelmap"
+version = "5.0.0"
+description = "A modular Python library for making voxel and 3D models from NumPy arrays."
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+
+authors = [
+  { name = "Andrew Garcia", email = "garcia.gtr@gmail.com" }
+]
+
+dependencies = [
+  "numpy>=1.25",         # 1.25+ supports Python 3.12
+  "matplotlib>=3.8"      # 3.8+ supports Python 3.12
+]
+
+[project.optional-dependencies]
+io = [
+  "pandas>=2.1"          # 2.1+ supports Python 3.12
+]
+mesh = [
+  "pyvista>=0.44",       # modern pyvista, 3.12-compatible
+  "scikit-image>=0.22",  # 0.22+ supports Python 3.12
+  "opencv-python>=4.8",  # 4.8+ has wheels for 3.12
+  "scipy>=1.11"          # 1.11+ supports Python 3.12
+]
+all = [
+  "pandas>=2.1",
+  "pyvista>=0.44",
+  "scikit-image>=0.22",
+  "opencv-python>=4.8",
+  "scipy>=1.11"
+]
+
+[tool.setuptools]
+packages = ["voxelmap"]
+
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+testpaths = ["tests"]
