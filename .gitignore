@@ -7,6 +7,7 @@ tests/draft.py
 venv/
 imagemesh_concept/
 _old
+*egg-info
 
 # from model_files
 #extra
@@ -16,6 +17,7 @@ model_files/confidential
 
 #docs make latexpdf
 docs/build
+docs/source/generated
 usage.py
 
 #files
@@ -33,3 +35,5 @@ sample_strucs.py
 #showfileshere
 ShowFilesHere*
 show.txt
+
+openai_gpt_explore
