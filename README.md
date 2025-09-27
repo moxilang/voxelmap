@@ -1,13 +1,20 @@
-# voxelmap
+<!-- LOGO -->
+<p align="center">
+ <img src="voxelmap.png" width="250"></a>
+
+</p>
+<h1 align="center">voxelmap</h1>
+<p align="center">
+A lightweight Python library for building  <strong>voxel models</strong> from NumPy arrays.
+</p>
+
 
 [![License](http://img.shields.io/\:license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/andrewrgarcia/voxelmap/main/LICENSE)
 [![Documentation Status](https://readthedocs.org/projects/voxelmap/badge/?version=latest)](https://voxelmap.readthedocs.io/en/latest/?badge=latest)
 
-A lightweight Python library for building **voxel models** from NumPy arrays.
 Simple to start, modular when you need more.
 
 <a href="https://voxelmap.vercel.app">
-<img src="https://github.com/andrewrgarcia/voxelmap/blob/main/voxelmap.svg?raw=true" width="250"></a>
 
 ---
 

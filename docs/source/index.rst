@@ -1,114 +1,87 @@
-Welcome to voxelmap's documentation!
-=======================================
+Welcome to VoxelMap’s Documentation!
+====================================
 
-Let's make 3-D models with Python!
------------------------------------
+Make 3D models with **NumPy + Python** 🚀
 
-.. figure:: ../img/icon_vxm.png
-  :width: 200
-  :alt: Alternative text
-  :target: https://github.com/andrewrgarcia/voxelmap
+.. figure:: ../img/voxelmap.png
+   :width: 180
+   :alt: VoxelMap icon
+   :target: https://github.com/andrewrgarcia/voxelmap
 
-  `Check out voxelmap's open-source on GitHub <https://github.com/andrewrgarcia/voxelmap>`_
+   `View VoxelMap on GitHub <https://github.com/andrewrgarcia/voxelmap>`_
 
-.. |mars| image:: ../img/mars_imagemesh.png
-  :width: 200
-  :alt: Alternative text
+---
 
-.. |art| image:: ../img/art.png
-  :width: 200
-  :alt: Alternative text
+What is VoxelMap?
+-----------------
 
-Ever wanted to make simple 3-D models from numpy arrays? Now you can do that with voxelmap ! **Voxelmap** is a Python library for 
-making voxel and three-dimensional models from NumPy arrays. It was initially made to streamline 3-D voxel modeling by assigning each
-integer in an array to a voxel. Now, methods are being developed for mesh representations, such as **ImageMesh**, voxel-to-mesh transformation and vice-versa. 
+VoxelMap is a **lightweight Python library** for turning NumPy arrays into:
 
-Check out the :doc:`usage` section for further information, including how to :ref:`installation` the project. For some quick examples / templates, check out the next section. 
+- **Voxel models** → colored cubes for quick prototyping.  
+- **Meshes** → low-poly `.obj` files with ImageMesh & MarchingMesh.  
+- **Interactive 3D** → zoom, pan, and rotate with PyVista.  
 
-Key Features
-..............................
+It’s designed for **simplicity first**, with optional extras when you need more.
 
-..
-  .. |islandmesh| image:: ../img/argisle.png
-    :width: 200
-    :alt: Alternative text
+---
 
-.. |cmapcube| image:: ../img/cmapcube.png
-  :width: 200
-  :alt: Alternative text
+Quickstart
+----------
 
-  
-.. |randomwalk| image:: ../img/randomwalk_tagged.png
-  :width:  300
-  :alt: Alternative text
+A red cube in 3 lines:
 
-.. |skullmesh| image:: ../img/skull_mesh.png
-  :width: 200
-  :alt: Alternative text
+.. code-block:: python
 
-.. |galactic| image:: ../img/galactic_mesh.png
-  :width: 200
-  :alt: Alternative text
+   import numpy as np
+   from voxelmap import Model
 
+   arr = np.ones((3, 3, 3))
+   model = Model(arr)
+   model.set_color(1, "red")
+   model.draw_mpl("custom")
 
-.. |lowpoly| image:: ../img/land_meshview.png
-  :width: 200
-  :alt: Alternative text
+➡ Produces a solid red cube.
 
+For more, see :doc:`usage`.
 
-.. |pillars_blender| image:: ../img/objto3d/pillars_blender.png
-  :width:  200
-  :alt: Alternative text
-
-+------------------------+-----------------------+--------------------------+
-| |cmapcube|             | |randomwalk|          |  |galactic|              |
-+------------------------+-----------------------+--------------------------+
-| :ref:`voxeldraw_array` |  :ref:`blockcol`      |  :doc:`examples/meshrec` | 
-+------------------------+-----------------------+--------------------------+
-| |lowpoly|              | |skullmesh|           |  |pillars_blender|       |
-+------------------------+-----------------------+--------------------------+
-| :ref:`lowpolyimgmesh`  | :doc:`examples/skull` | :ref:`modelobjman`       |
-+------------------------+-----------------------+--------------------------+
-
-.. 
-  |islandmesh| |skullmesh| |galactic|
-
-
-Colab Notebook
-..............................
-
-While we offer an interactive tutorial via a Colab notebook, we recommend using this site as your primary guide instead. Please note that the Colab notebook is currently out-of-date and may not reflect the most recent features and functionality of Voxelmap. We are continually updating our website to ensure the latest information and resources are available to our users.
-
-.. image:: ../img/colaboratory.png
-  :width: 500
-  :alt: Alternative text
-  :target: https://colab.research.google.com/drive/1RMEMgZHlk_tKAzfS4QfXLJV9joDgdh8N?usp=sharing
-
-
-.. note::
-
-   This project is under active development.
-
+---
 
 Contents
 --------
 
 .. toctree::
+   :maxdepth: 2
 
+   installation
    usage
    api
+   io 
+   mesh
 
 Examples
------------------------
+--------
 
 .. toctree::
-  
+   :maxdepth: 1
+
    examples/skull
    examples/meshrec
 
-Whitepapers
------------------------
+Advanced
+--------
 
 .. toctree::
+   :maxdepth: 1
 
    imagemesh
+
+---
+
+Notes
+-----
+
+- VoxelMap v5.0.0 introduces a **simplified API**:  
+  use ``palette`` and ``set_color`` instead of ``hashblocks``.  
+- Interactive features require optional installs (see :ref:`installation`).  
+- This project is under active development. Contributions welcome!
+

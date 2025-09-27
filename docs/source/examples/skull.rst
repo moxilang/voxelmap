@@ -1,37 +1,45 @@
-Voxel Model to 3-D Mesh
-==========================
+Voxel Model → 3D Mesh
+=====================
 
+VoxelMap can transform a voxel model from **Goxel** (exported `.txt`) into a 3D mesh.
 
-Voxelmap can transform a voxel model from Goxel, which is saved as a text file (.txt), into a more lifelike 3D mesh using the Marching Cubes algorithm. 
-You can start by downloading the .txt file, which can be achieved by entering a certain text in your command line.
+First, download the model file:
 
->>> wget https://raw.githubusercontent.com/andrewrgarcia/voxelmap/main/model_files/skull.txt
+.. code-block:: bash
 
-Then in the same directory, create skull.py script with the following code:
+   wget https://raw.githubusercontent.com/andrewrgarcia/voxelmap/main/model_files/skull.txt
+
+---
+
+Loading the Voxel Model
+-----------------------
 
 .. code-block:: python
 
-    #skull.py
-    import voxelmap as vxm
+   from voxelmap import Model
 
-    model = vxm.Model()
+   model = Model()
+   model.load("skull.txt")
 
-    model.load('extra/skull.txt')
+   # basic voxel view (Matplotlib)
+   model.set_color(1, "white")
+   model.draw_mpl("custom")
 
-    arr = model.array 
+➡ Produces a solid voxel rendering of the skull.
 
+---
 
-    model.array = model.array[::-1]
+Convert to Mesh
+---------------
 
-    'draw in standard voxel form'
-    model.draw('voxels',wireframe=True, background_color='#3e404e',window_size=[700,700])
+.. code-block:: python
 
-    'to convert to mesh'
-    model.MarchingMesh()
-    model.MeshView(wireframe=True,alpha=1,color=True,background_color='#b064fd',viewport=[700,700])
+   model.MarchingMesh("skull.obj")
+   model.MeshView("skull.obj", wireframe=True, color="white")
 
-Running the above script will give you the below image
+➡ Produces a 3D mesh view (requires `[mesh]`).
 
 .. image:: ../../img/skull_mesh.png
-  :width: 400
-  :alt: Alternative text
+   :width: 400
+   :alt: Skull mesh preview
+

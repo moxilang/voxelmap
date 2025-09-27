@@ -1,57 +1,59 @@
 API Reference
-================
+=============
 
-Global Methods
------------------
-As the methods are several, below are only listed the most pertinent global methods of voxelmap, 
-in order of the lowest level to highest level of applications to 3-D modeling operations.and classified in
-sub-sections:
+This page lists the main functions and classes in **VoxelMap v5.0.0**.
 
-Special 
-..................
-.. autoclass:: voxelmap.objcast
-   
-.. autoclass:: voxelmap.matrix_toXY
+---
 
-.. autoclass:: voxelmap.tensor_toXYZ
+Global Functions
+----------------
 
+.. autofunction:: voxelmap.objcast
 
-Load and Save 
-.................
-.. autoclass:: voxelmap.load_array
+Mesh (requires `[mesh]`)
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass:: voxelmap.save_array
+.. autofunction:: voxelmap.MarchingMesh
+.. autofunction:: voxelmap.MeshView
+.. autofunction:: voxelmap.ImageMesh
 
-.. autoclass:: voxelmap.tojson
+I/O (requires `[io]`)
+^^^^^^^^^^^^^^^^^^^^^
 
-.. autoclass:: voxelmap.load_from_json
+.. autofunction:: voxelmap.save_array
+.. autofunction:: voxelmap.load_array
+.. autofunction:: voxelmap.tojson
+.. autofunction:: voxelmap.load_from_json
 
-Array Manipulation
-....................
-.. autoclass:: voxelmap.resize_array
+---
 
-.. autoclass:: voxelmap.roughen
+Model Class
+-----------
 
-.. autoclass:: voxelmap.random_kernel_convolve
-
-
-Mapping 
-..................
-.. autoclass:: voxelmap.MarchingMesh
-
-.. autoclass:: voxelmap.MeshView
-
-
-
-Local Methods to Model class
--------------------------------
 .. autoclass:: voxelmap.Model
-   :members: 
-   
-   .. automethod:: __init__
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
+Key methods include:
+- ``set_color`` — assign a color to a voxel value.  
+- ``draw_mpl`` — render voxels with Matplotlib.  
+- ``draw`` — interactive rendering (PyVista, requires `[mesh]`).  
+- ``save`` / ``load`` — persist models as JSON or TXT.  
+- ``ImageMap`` — map 2D images to voxel arrays.  
+
+---
+
+Autosummary Index
+-----------------
 
 .. autosummary::
    :toctree: generated
 
    voxelmap
+   voxelmap.Model
+   voxelmap.objcast
+   voxelmap.ImageMesh
+   voxelmap.MarchingMesh
+   voxelmap.MeshView
+
