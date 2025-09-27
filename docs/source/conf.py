@@ -29,7 +29,14 @@ intersphinx_mapping = {
 }
 intersphinx_disabled_domains = ['std']
 
-autodoc_mock_imports = ["vtkmodules", "pyvista", "vtkmodules.vtkFiltersExtraction"]
+autodoc_mock_imports = [
+    "vtkmodules",
+    "pyvista",
+    "vtkmodules.vtkFiltersExtraction",
+    "scipy",
+    "skimage",
+    "pandas"
+]
 
 
 templates_path = ['_templates']
