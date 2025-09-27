@@ -9,21 +9,29 @@ Global Functions
 ----------------
 
 .. autofunction:: voxelmap.objcast
+   :no-index:
 
 Mesh (requires `[mesh]`)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. autofunction:: voxelmap.MarchingMesh
+   :no-index:
 .. autofunction:: voxelmap.MeshView
+   :no-index:
 .. autofunction:: voxelmap.ImageMesh
+   :no-index:
 
 I/O (requires `[io]`)
 ^^^^^^^^^^^^^^^^^^^^^
 
 .. autofunction:: voxelmap.save_array
+   :no-index:
 .. autofunction:: voxelmap.load_array
+   :no-index:
 .. autofunction:: voxelmap.tojson
+   :no-index:
 .. autofunction:: voxelmap.load_from_json
+   :no-index:
 
 ---
 
@@ -34,6 +42,7 @@ Model Class
    :members:
    :undoc-members:
    :show-inheritance:
+   :no-index:
 
 Key methods include:
 - ``set_color`` — assign a color to a voxel value.  
@@ -56,4 +65,3 @@ Autosummary Index
    voxelmap.ImageMesh
    voxelmap.MarchingMesh
    voxelmap.MeshView
-
