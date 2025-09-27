@@ -12,9 +12,17 @@ __all__ = [
     "toTXT", "objcast",
 ]
 
-# Mesh extras optional
+# Mesh extras (optional)
 try:
-    from voxelmap.mesh import MarchingMesh, MeshView, ImageMap, ImageMesh
-    __all__ += ["MarchingMesh", "MeshView", "ImageMap", "ImageMesh"]
+    from voxelmap.mesh import MarchingMesh, MeshView, ImageMesh
 except ImportError:
+    # dependencies (pyvista, scipy, etc.) may be missing → just skip
     pass
+else:
+    # expose at top level
+    globals().update({
+        "MarchingMesh": MarchingMesh,
+        "MeshView": MeshView,
+        "ImageMesh": ImageMesh,
+    })
+    __all__.extend(["MarchingMesh", "MeshView", "ImageMesh"])
