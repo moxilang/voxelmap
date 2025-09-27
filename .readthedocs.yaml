@@ -28,12 +28,8 @@ formats:
 
 # Optionally declare the Python requirements required to build your docs
 python:
-   install:
-   - requirements: docs/requirements.in
-   - method: pip
-   path: .
-
-# Include non-Python assets (like img/)
-# so RTD can find and serve them
-submodules:
-  include: all
+  install:
+    # Install docs dependencies
+    - requirements: docs/requirements.in
+    # Install voxelmap itself (so autodoc can import it)
+    - path: .
