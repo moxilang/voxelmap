@@ -15,16 +15,16 @@ These tools use `scipy`, `scikit-image`, and `pyvista` for meshing and interacti
 ImageMesh
 ---------
 
-`ImageMesh` creates a **low-poly mesh** directly from a 2D image.  
-It partitions the image into sectors, maps pixel intensity to depth, and wraps each sector with a convex hull.
+`ImageMesh` converts 2D image arrays into convex-hull meshes.
 
 .. code-block:: python
 
-   import voxelmap as vxm
+   import cv2
+   from voxelmap.mesh import ImageMesh, MeshView
 
-   model = vxm.Model(file="docs/img/land.png")   # load image
-   model.ImageMesh(out_file="land.obj", L_sectors=15)
-   model.MeshView()  # interactive view
+   img = cv2.imread("land.png", 0)  # grayscale
+   ImageMesh(img, out_file="land.obj", L_sectors=15)
+   MeshView("land.obj", color="white", alpha=0.8)
 
 ➡ Produces `land.obj` and opens a 3D PyVista window.
 
@@ -39,12 +39,13 @@ MarchingMesh
 
    import numpy as np
    from voxelmap import Model
+   from voxelmap.mesh import MarchingMesh, MeshView  # 👈 import from voxelmap.mesh
 
    arr = np.random.randint(0, 2, (20, 20, 20))  # random voxel array
    model = Model(arr)
 
-   model.MarchingMesh("random.obj")
-   model.MeshView("random.obj")
+   MarchingMesh(model.array, "random.obj")
+   MeshView("random.obj")
 
 ➡ Produces `random.obj` and displays it.
 
@@ -58,7 +59,9 @@ It can be used after `ImageMesh` or `MarchingMesh`.
 
 .. code-block:: python
 
-   model.MeshView("random.obj", wireframe=True, color="white")
+   from voxelmap.mesh import MeshView
+
+   MeshView("random.obj", wireframe=True, color="white")
 
 Options:
 - `wireframe=True` → show mesh edges  

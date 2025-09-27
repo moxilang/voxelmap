@@ -1,17 +1,16 @@
 # Configuration file for the Sphinx documentation builder.
 
 # -- Project information
-
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))  # so voxelmap is importable
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 project = 'voxelmap'
-copyright = '2025, Andrew R. Garcia'
+copyright = '2023, Andrew R. Garcia'
 author = 'Andrew R. Garcia, Ph.D.'
-release = '5.0.0'
-version = '5.0.0'
 
+release = '5.0'
+version = '5.0.0'
 
 # -- General configuration
 
@@ -35,7 +34,8 @@ autodoc_mock_imports = [
     "vtkmodules.vtkFiltersExtraction",
     "scipy",
     "skimage",
-    "pandas"
+    "pandas",
+    "cv2",  
 ]
 
 
@@ -47,4 +47,3 @@ html_theme = 'sphinx_rtd_theme'
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
-

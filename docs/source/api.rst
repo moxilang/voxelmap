@@ -10,28 +10,34 @@ Global Functions
 
 .. autofunction:: voxelmap.objcast
    :no-index:
-
+   
 Mesh (requires `[mesh]`)
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. autofunction:: voxelmap.MarchingMesh
+.. autofunction:: voxelmap.mesh.MarchingMesh
    :no-index:
-.. autofunction:: voxelmap.MeshView
+
+.. autofunction:: voxelmap.mesh.MeshView
    :no-index:
-.. autofunction:: voxelmap.ImageMesh
+
+.. autofunction:: voxelmap.mesh.ImageMesh
    :no-index:
+
+
+
 
 I/O (requires `[io]`)
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. autofunction:: voxelmap.save_array
+.. autofunction:: voxelmap.io.save_array
    :no-index:
-.. autofunction:: voxelmap.load_array
+.. autofunction:: voxelmap.io.load_array
    :no-index:
-.. autofunction:: voxelmap.tojson
+.. autofunction:: voxelmap.io.tojson
    :no-index:
-.. autofunction:: voxelmap.load_from_json
+.. autofunction:: voxelmap.io.load_from_json
    :no-index:
+
 
 ---
 
@@ -61,7 +67,15 @@ Autosummary Index
 
    voxelmap
    voxelmap.Model
-   voxelmap.objcast
-   voxelmap.ImageMesh
-   voxelmap.MarchingMesh
-   voxelmap.MeshView
+   voxelmap.io
+   voxelmap.mesh
+
+# 👇 add this section to include stub pages in the build
+Generated API Docs
+------------------
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   generated/*

@@ -16,7 +16,7 @@ except ImportError as e:
         "Install with `pip install voxelmap[mesh]`."
     ) from e
 
-from voxelmap.core import Model
+from .core import Model
 
 
 def _draw(self, coloring="custom", background_color="#cccccc",
