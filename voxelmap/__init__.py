@@ -9,5 +9,4 @@ from voxelmap.io import (
 try:
     from voxelmap.mesh import MarchingMesh, MeshView, ImageMap, ImageMesh
 except ImportError:
-    pass
-
+    MarchingMesh = MeshView = ImageMap = ImageMesh = None
