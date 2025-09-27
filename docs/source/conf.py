@@ -2,12 +2,16 @@
 
 # -- Project information
 
-project = 'voxelmap'
-copyright = '2022, Andrew R. Garcia'
-author = 'Andrew R. Garcia, Ph.D.'
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../..'))  # so voxelmap is importable
 
-release = '5.'
+project = 'voxelmap'
+copyright = '2025, Andrew R. Garcia'
+author = 'Andrew R. Garcia, Ph.D.'
+release = '5.0.0'
 version = '5.0.0'
+
 
 # -- General configuration
 
@@ -36,3 +40,4 @@ html_theme = 'sphinx_rtd_theme'
 
 # -- Options for EPUB output
 epub_show_urls = 'footnote'
+

@@ -30,7 +30,8 @@ formats:
 python:
    install:
    - requirements: docs/requirements.in
-
+   - method: pip
+   path: .
 
 # Include non-Python assets (like img/)
 # so RTD can find and serve them
