@@ -1,6 +1,6 @@
 <!-- LOGO -->
 <p align="center">
- <img src="voxelmap.png" width="250"></a>
+ <img src="voxelmap.png" width="160"></a>
 
 </p>
 <h1 align="center">voxelmap</h1>
