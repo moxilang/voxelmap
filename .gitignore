@@ -1,19 +1,17 @@
-__pycache__
-POETRY-USAGE.md
-try.py
-drafts/
-ig/
-tests/draft.py
-venv/
-imagemesh_concept/
-_old
-*egg-info
+openai_gpt_explore
 
-# from model_files
-#extra
-model_files/more_models
-#confidential 
-model_files/confidential
+# Packaging artifacts
+dist/
+build/
+*.egg-info/
+
+# Virtual environments
+venv/
+.env/
+
+# Python cache
+__pycache__/
+*.pyc
 
 #docs make latexpdf
 docs/build
@@ -24,16 +22,3 @@ usage.py
 *.obj
 *.mtl
 *.mp4
-#except
-!model_files/simple_cube.obj
-!model_files/sphere.obj
-
-file.txt
-
-sample_strucs.py
-
-#showfileshere
-ShowFilesHere*
-show.txt
-
-openai_gpt_explore
