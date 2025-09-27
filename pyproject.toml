@@ -1,23 +1,12 @@
-[build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "voxelmap"
 version = "5.0.0"
-description = "A modular Python library for making voxel and 3D models from NumPy arrays."
+description = "A Python library for voxel modeling from NumPy arrays"
 readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Andrew R. Garcia", email = "garcia.gtr@gmail.com" }]
 requires-python = ">=3.8"
-license = "MIT"
-
-authors = [
-  { name = "Andrew Garcia", email = "garcia.gtr@gmail.com" }
-]
-
-dependencies = [
-  "numpy>=1.25",         # 1.25+ supports Python 3.12
-  "matplotlib>=3.8"      # 3.8+ supports Python 3.12
-]
+dependencies = ["numpy>=1.24.1", "matplotlib>=3.6.2"]
 
 [project.optional-dependencies]
 io = [
@@ -36,6 +25,11 @@ all = [
   "opencv-python>=4.8",
   "scipy>=1.11"
 ]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 
 [tool.setuptools]
 packages = ["voxelmap"]
