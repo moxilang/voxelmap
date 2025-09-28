@@ -7,7 +7,6 @@ import numpy as np
 
 try:
     import pyvista
-    from scipy.spatial import ConvexHull
     from skimage import measure
     import cv2
 except ImportError as e:
@@ -65,10 +64,8 @@ def _draw(self, coloring="custom", background_color="#cccccc",
         return pl
 
 
-
 # Monkey-patch onto Model
 setattr(Model, "draw", _draw)
-
 
 
 def MarchingMesh(array, out_file="scene.obj", level=0, spacing=(1., 1., 1.)):
@@ -83,11 +80,22 @@ def MarchingMesh(array, out_file="scene.obj", level=0, spacing=(1., 1., 1.)):
 def MeshView(objfile="scene.obj", color="black", alpha=1.0,
              wireframe=True, background_color="#cccccc"):
     mesh = pyvista.read(objfile)
-    theme = pyvista.themes.DefaultTheme()
-    theme.color = color
-    theme.show_edges = wireframe
+
+    # --- Compatibility shim ---
+    if hasattr(pyvista.themes, "DefaultTheme"):   # old versions
+        theme = pyvista.themes.DefaultTheme()
+    else:                                         # new versions (>=0.39+)
+        theme = pyvista.themes.Theme()
+
+    # Configure theme
     theme.background = background_color
-    mesh.plot(theme=theme, opacity=alpha)
+    theme.show_edges = wireframe
+    if hasattr(theme, "edge_color"):
+        theme.edge_color = color  # newer versions
+    else:
+        theme.color = color       # fallback for very old ones
+
+    mesh.plot(color=color, opacity=alpha, theme=theme)
 
 
 def ImageMap(image_array, depth=5):
@@ -121,7 +129,7 @@ def ImageMesh(image_array, out_file="scene.obj", L_sectors=4, rel_depth=1.0):
                     coords[:, 1] + j*W//L_sectors,   # x
                     rel_depth * np.ones(len(coords)) # z
                 ])
-                hull = ConvexHull(pts, qhull_options="QJ")  # 👈 joggle fix
+                hull = ConvexHull(pts, qhull_options="QJ")  # joggle fix
                 simplices.extend(hull.simplices + num)
                 points.extend(pts)
                 num += len(pts)
