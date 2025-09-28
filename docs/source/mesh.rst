@@ -24,7 +24,7 @@ ImageMesh
 
    img = cv2.imread("land.png", 0)  # grayscale
    ImageMesh(img, out_file="land.obj", L_sectors=15)
-   MeshView("land.obj", color="white", alpha=0.8)
+   MeshView("land.obj", mode="flat", flat_color="white", alpha=0.8)
 
 ➡ Produces `land.obj` and opens a 3D PyVista window.
 
@@ -33,49 +33,56 @@ ImageMesh
 MarchingMesh
 ------------
 
-`MarchingMesh` converts voxel arrays into detailed triangle meshes using the Marching Cubes algorithm.
+`MarchingMesh` converts voxel arrays into detailed triangle meshes using the **Marching Cubes** algorithm.
 
 .. code-block:: python
 
    import numpy as np
    from voxelmap import Model
-   from voxelmap.mesh import MarchingMesh, MeshView  # 👈 import from voxelmap.mesh
+   from voxelmap.mesh import MarchingMesh, MeshView
 
    arr = np.random.randint(0, 2, (20, 20, 20))  # random voxel array
    model = Model(arr)
+   model.set_color(1, "blue")
 
-   MarchingMesh(model.array, "random.obj")
-   MeshView("random.obj")
+   MarchingMesh(model.array, out_file="random.obj", palette=model.palette, pad=1)
+   MeshView("random.obj", palette=model.palette, mode="solid")
 
-➡ Produces `random.obj` and displays it.
+➡ Produces `random.obj` with colors preserved and displays it interactively.
 
 ---
 
 MeshView
 --------
 
-`MeshView` is a lightweight wrapper around PyVista for visualizing `.obj` meshes.  
+`MeshView` is a lightweight wrapper around **PyVista** for visualizing `.obj` meshes.  
 It can be used after `ImageMesh` or `MarchingMesh`.
 
 .. code-block:: python
 
    from voxelmap.mesh import MeshView
 
-   MeshView("random.obj", wireframe=True, color="white")
+   # Wireframe only
+   MeshView("random.obj", mode="wireframe", wireframe_color="green", background_color="black")
+
+   # Solid + edges
+   MeshView("random.obj", palette={1: "red"}, mode="both", wireframe_color="magenta")
 
 Options:
-- `wireframe=True` → show mesh edges  
-- `color="red"` → set solid fill color  
-- `alpha=0.8` → transparency  
-- `viewport=(800, 800)` → window size
+- ``mode="solid"`` → surfaces colored by palette  
+- ``mode="wireframe"`` → only edges  
+- ``mode="both"`` → fill + edges  
+- ``mode="flat"`` → single solid color (ignores palette)  
+- ``palette={id: "color"}`` → map voxel labels to colors  
+- ``background_color="black"`` → set viewer background  
+- ``wireframe_color="green"`` → change edge color  
+- ``alpha=0.8`` → transparency  
 
 ---
 
 When to use which?
 ------------------
 
-- **ImageMesh** → fast, low-poly meshes from 2D images (good for landscapes, textures).  
+- **ImageMesh** → fast, low-poly meshes from 2D images (landscapes, silhouettes).  
 - **MarchingMesh** → high-resolution meshes from 3D voxel data.  
-- **MeshView** → universal visualization of `.obj` meshes.
-
-
+- **MeshView** → universal visualization of `.obj` meshes with multiple viewing modes.
