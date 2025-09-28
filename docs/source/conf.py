@@ -38,7 +38,6 @@ autodoc_mock_imports = [
     "cv2",  
 ]
 
-
 templates_path = ['_templates']
 
 # -- Options for HTML output
