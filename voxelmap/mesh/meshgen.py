@@ -60,19 +60,3 @@ def MarchingMesh(array, palette=None, out_file="scene.obj",
         with open(mtlfile, "w") as m:
             m.write("# empty material file\n")
 
-
-def _parse_face_labels_from_obj(objfile):
-    """Parse OBJ to get a list of label IDs per face using 'usemtl mat<id>'."""
-    face_labels, current = [], None
-    with open(objfile, "r") as fh:
-        for line in fh:
-            if line.startswith("usemtl"):
-                name = line.strip().split()[1]
-                if name.startswith("mat"):
-                    try:
-                        current = int(name[3:])
-                    except Exception:
-                        current = None
-            elif line.startswith("f "):
-                face_labels.append(current)
-    return face_labels
