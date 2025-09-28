@@ -23,7 +23,7 @@ Loading the Voxel Model
 
    # basic voxel view (Matplotlib)
    model.set_color(1, "white")
-   model.draw_mpl("custom")
+   model.draw("custom")
 
 ➡ Produces a solid voxel rendering of the skull.
 
@@ -34,8 +34,10 @@ Convert to Mesh
 
 .. code-block:: python
 
-   model.MarchingMesh("skull.obj")
-   model.MeshView("skull.obj", wireframe=True, color="white")
+   from voxelmap.mesh import MarchingMesh, MeshView
+
+   MarchingMesh(model.array, out_file="skull.obj")
+   MeshView("skull.obj", mode="wireframe", wireframe_color="white")
 
 ➡ Produces a 3D mesh view (requires `[mesh]`).
 

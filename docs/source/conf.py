@@ -9,8 +9,8 @@ project = 'voxelmap'
 copyright = '2023, Andrew R. Garcia'
 author = 'Andrew R. Garcia, Ph.D.'
 
-release = '5.0'
-version = '5.0.0'
+release = '5.1'
+version = '5.1.0'
 
 # -- General configuration
 

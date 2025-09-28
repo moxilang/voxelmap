@@ -1,15 +1,14 @@
 <!-- LOGO -->
 <p align="center">
  <img src="voxelmap.png" width="160"></a>
-
 </p>
+
 <h1 align="center">voxelmap</h1>
 <p align="center">
 A lightweight Python library for building  <strong>voxel models</strong> from NumPy arrays.
 </p>
 
-
-[![License](http://img.shields.io/\:license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/andrewrgarcia/voxelmap/main/LICENSE)
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://raw.githubusercontent.com/andrewrgarcia/voxelmap/main/LICENSE)
 [![Documentation Status](https://readthedocs.org/projects/voxelmap/badge/?version=latest)](https://voxelmap.readthedocs.io/en/latest/?badge=latest)
 
 Simple to start, modular when you need more.
@@ -139,6 +138,54 @@ model.draw_mpl(coloring="linear")
 ```
 
 ➡️ Produces a **column shaded with a viridis vertical gradient**.
+
+---
+
+### 5. Mesh Export + Viewing Modes (OBJ+MTL)
+
+You can export voxel arrays as **geometry + materials** with `MarchingMesh`, then reload them in `MeshView` for different visualization styles.
+
+```python
+import numpy as np
+from voxelmap import Model
+from voxelmap.mesh import MarchingMesh, MeshView
+
+arr = np.zeros((5, 5, 5))
+arr[1:4, 1:4, 1:4] = 1   # cube
+arr[2:3, 2:3, 4] = 2     # red voxel
+
+m = Model(arr)
+m.set_color(1, "gray")   # cube body
+m.set_color(2, "red")    # highlight
+
+# Export OBJ+MTL
+MarchingMesh(m.array, palette=m.palette, out_file="cube.obj")
+
+# 1. Solid (palette only)
+MeshView("cube.obj", palette=m.palette, mode="solid")
+
+# 2. Wireframe only (green edges)
+MeshView("cube.obj", mode="wireframe", wireframe_color="green")
+
+# 3. Both solid + edges
+MeshView("cube.obj", palette=m.palette, mode="both", wireframe_color="magenta")
+
+# 4. Flat fill (single color, ignore palette)
+MeshView("cube.obj", mode="flat", flat_color="orange")
+```
+
+➡️ Modes available:
+
+* **solid**: surfaces colored from `palette`
+* **wireframe**: edges only, no fills
+* **both**: filled faces + edges
+* **flat**: single fill color, ignores palette
+
+You can also set:
+
+* `background_color="black"` (hex or named color)
+* `background_image="starfield.png"` (PNG/JPEG)
+* `wireframe_color="cyan"`
 
 ---
 
