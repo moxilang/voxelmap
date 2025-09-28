@@ -1,6 +1,8 @@
 import numpy as np
 import tempfile, os
-from voxelmap.io import tojson, load_from_json, save_array, load_array, objcast
+from voxelmap.io import tojson, load_from_json, save_array, load_array, objcast, toTXT
+from voxelmap import Model
+
 
 def test_json_roundtrip(tmp_path):
     arr = np.zeros((2, 2, 2))
@@ -11,12 +13,14 @@ def test_json_roundtrip(tmp_path):
     assert "coords" in data
     assert data["val"][0] == 1
 
+
 def test_pickle_roundtrip(tmp_path):
     arr = np.random.randint(0, 10, (4, 4))
     filename = tmp_path / "arr.pkl"
     save_array(arr, filename)
     arr2 = load_array(filename)
     assert np.array_equal(arr, arr2)
+
 
 def test_objcast_roundtrip(tmp_path):
     # Write a minimal OBJ file
@@ -27,3 +31,18 @@ def test_objcast_roundtrip(tmp_path):
     assert arr.ndim == 3
     assert arr.any()
 
+
+def test_txt_roundtrip(tmp_path):
+    """Ensure saving and reading TXT via Model works (Goxel format)."""
+    arr = np.zeros((3, 3, 3))
+    arr[1, 1, 1] = 1
+    model = Model(arr)
+    model.set_color(1, "#ff0000")
+
+    txtfile = tmp_path / "scene.txt"
+    model.save(str(txtfile))
+
+    # Verify file exists and has color entry
+    content = txtfile.read_text()
+    assert "ff0000" in content
+    assert "1 1 1" in content
