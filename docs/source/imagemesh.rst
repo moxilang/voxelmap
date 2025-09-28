@@ -24,7 +24,7 @@ Quick Example
 .. code-block:: python
 
    from voxelmap import Model
-   from voxelmap.mesh import ImageMesh, MeshView   # 👈 import from mesh
+   from voxelmap.mesh import ImageMesh, MeshView
 
    model = Model(file="docs/img/land.png")
 
@@ -32,7 +32,7 @@ Quick Example
    ImageMesh(model.array, out_file="land.obj", L_sectors=15)
 
    # preview interactively (requires voxelmap[mesh])
-   MeshView("land.obj", color="white", alpha=0.8)
+   MeshView("land.obj", flat_color="white", alpha=0.8)
 
 ➡ Produces a lightweight terrain mesh.
 
