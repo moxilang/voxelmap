@@ -28,7 +28,7 @@ Use `draw_mpl` for quick static 3D voxel plots:
 .. code-block:: python
 
    model.set_color(1, "red")
-   model.draw_mpl(coloring="custom")
+   model.draw_mpl("custom")
 
 ➡ Produces a solid red cube.
 
@@ -70,7 +70,7 @@ If you installed with `[mesh]`, you can use the **PyVista** backend for interact
 
 .. code-block:: python
 
-   model.draw(coloring="custom")
+   model.draw("custom")
 
 ➡ Opens an interactive 3D window.
 
