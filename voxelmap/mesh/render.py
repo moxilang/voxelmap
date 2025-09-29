@@ -77,6 +77,9 @@ def MeshView(objfile="scene.obj", palette=None, alpha=1.0,
       - "both": filled faces + edges (with palette)
       - "flat": single solid color fill (ignores palette)
     """
+    import matplotlib.pyplot as plt
+    from matplotlib import colors as mcolors
+
     mesh = pyvista.read(objfile)
 
     # Theme setup
@@ -92,31 +95,43 @@ def MeshView(objfile="scene.obj", palette=None, alpha=1.0,
     if background_image is not None:
         pl.add_background_image(background_image)
 
+    # --- Wireframe only ---
     if mode == "wireframe":
         pl.add_mesh(mesh, color=wireframe_color, style="wireframe")
         pl.show()
         return
 
+    # --- Flat fill only ---
     if mode == "flat":
         pl.add_mesh(mesh, color=flat_color, opacity=alpha)
         pl.show()
         return
 
+    # --- Solid or Both: split per label ---
     if palette is not None:
         face_labels = _parse_face_labels_from_obj(objfile)
         if len(face_labels) == mesh.n_cells:
-            from matplotlib import colors as mcolors
-            colors_rgba = np.zeros((mesh.n_cells, 4), dtype=np.uint8)
-            for i, lab in enumerate(face_labels):
+            face_labels = np.array(face_labels)
+
+            for lab in np.unique(face_labels):
+                mask = np.where(face_labels == lab)[0]
+                submesh = mesh.extract_cells(mask)
+
                 if lab in palette:
                     c, a = palette[lab]
                     r, g, b = mcolors.to_rgb(c)
-                    colors_rgba[i] = [int(r*255), int(g*255), int(b*255), int(a*255)]
+                    pl.add_mesh(
+                        submesh,
+                        color=(r, g, b),
+                        opacity=a,
+                        style="surface" if mode == "solid" else "surface",
+                        show_edges=(mode == "both"),
+                        edge_color=wireframe_color if mode == "both" else None
+                    )
                 else:
-                    colors_rgba[i] = [200, 200, 200, 255]
-            mesh.cell_data["colors"] = colors_rgba
-            pl.add_mesh(mesh, scalars="colors", rgba=True, opacity=alpha)
+                    pl.add_mesh(submesh, color="gray", opacity=1.0)
         else:
+            # fallback: whole mesh, global alpha
             pl.add_mesh(mesh, opacity=alpha)
     else:
         pl.add_mesh(mesh, opacity=alpha)

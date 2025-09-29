@@ -1,6 +1,6 @@
 [project]
 name = "voxelmap"
-version = "5.1.0"
+version = "5.1.1"
 description = "A Python library for voxel modeling from NumPy arrays"
 readme = "README.md"
 license = { text = "MIT" }
