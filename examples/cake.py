@@ -1,6 +1,20 @@
 import numpy as np
 from voxelmap import Model
 
+def export_to_js(tensor):
+
+    # Convert to nested lists
+    tensor_list = tensor.tolist()
+
+    # Build JavaScript string
+    js_code = f"const tensor_structure = {tensor_list}\n\nexport default tensor_structure;"
+
+    # Save to file
+    with open("tensor_structure.js", "w") as f:
+        f.write(js_code)
+
+    print("✅ Wrote tensor_structure.js")
+
 # Create blank voxel grid
 arr = np.zeros((12, 11, 11), dtype=int)
 
@@ -31,6 +45,8 @@ m.set_color(2, "wheat")
 m.set_color(3, "mistyrose")
 m.set_color(4, "blue")
 m.set_color(5, "gold",0.25)
+
+export_to_js(arr)
 
 # 🎨 Draw voxelized cake
 m.draw("custom")  # Requires voxelmap[mesh]
